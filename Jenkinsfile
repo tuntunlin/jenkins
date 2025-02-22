@@ -1,9 +1,22 @@
 pipeline {
     agent any
     stages {      
-        stage('hello') {
+        stage('build') {
             steps {
-               sh 'cat test.txt'
+               echo 'Building'
+            }
+        }
+        stage('test') {
+            when {
+                changeset '**/*.sh'
+            }
+            steps {
+               echo 'Testing'
+            }
+        }
+        stage('deploy') {
+            steps {
+               echo 'Deploying'
             }
         }
     }
